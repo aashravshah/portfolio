@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light only">
+<meta name="theme-color" content="#F5F6F8">
+<title>Aashrav Shah — Product Case Studies</title>
+<meta name="description" content="Five product case studies by Aashrav Shah, Senior Technical Product Manager at GE HealthCare: a 0→1 fleet product ($6M+ influenced revenue), a 5TB+/day streaming platform, a GenAI assistant, AI agents for the software lifecycle, and probe intelligence.">
+<meta property="og:title" content="Aashrav Shah — Product Case Studies">
+<meta property="og:description" content="A hospital device fails. The data that explains why shouldn’t arrive a day late. Five data and AI products at GE HealthCare, explained in plain language first, architecture second.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://aashravshah.github.io/portfolio/">
+<script>document.documentElement.className = 'js';</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+
+  /* ===== Force light appearance even in forced-dark in-app browsers ===== */
+  html { color-scheme: light only; -webkit-text-fill-color: initial; background: #F5F6F8 !important; scroll-behavior: smooth; scroll-padding-top: 76px; }
+  @media (prefers-color-scheme: dark) { html, body { background: #F5F6F8 !important; color: #161D29 !important; } }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  body { filter: none; }
+
+  :root {
+    --bg: #F5F6F8; --surface: #FFFFFF;
+    --ink: #161D29; --ink-muted: #2C3E50; --ink-faint: #556B7F;
+    --amber: #8B4513; --amber-soft: #F5E6D3; --amber-line: #E8C494;
+    --teal: #0D3D3B; --teal-soft: #D0E8E6; --teal-mid: #146E6C;
+    --border: #E2E5EA; --track: #ECEFF3;
+    --font-display: 'Space Grotesk', system-ui, sans-serif;
+    --font-body: 'Source Serif 4', Georgia, serif;
+    --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
+    --max: 920px;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: var(--bg); color: var(--ink); font-family: var(--font-body); font-size: 18px; line-height: 1.7; -webkit-font-smoothing: antialiased; }
+  a { color: var(--teal); text-decoration: none; border-bottom: 1px solid currentColor; }
+  a:hover { color: var(--amber); }
+  :focus-visible { outline: 2px solid var(--teal-mid); outline-offset: 3px; border-radius: 2px; }
+  em { font-style: italic; }
+  .wrap { max-width: var(--max); margin: 0 auto; padding: 0 32px; }
+  .skip { position: absolute; left: -9999px; top: 8px; z-index: 300; background: var(--teal); color: #fff; padding: 8px 14px; font-family: var(--font-mono); font-size: 13px; border: none; }
+  .skip:focus { left: 8px; color: #fff; }
+
+  /* ===== Scroll progress + nav ===== */
+  .progress { position: fixed; top: 0; left: 0; right: 0; height: 3px; z-index: 200; background: transparent; pointer-events: none; }
+  .progress i { display: block; height: 100%; width: 100%; background: var(--teal-mid); transform-origin: 0 50%; transform: scaleX(0); }
+  nav.top { position: sticky; top: 0; z-index: 100; background: rgba(245,246,248,0.94); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); border-bottom: 1px solid var(--border); padding: 13px 0; }
+  .nav-inner { max-width: var(--max); margin: 0 auto; padding: 0 32px; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+  .nav-name { font-family: var(--font-display); font-weight: 700; font-size: 15px; color: var(--ink); white-space: nowrap; border: none; }
+  .nav-links { display: flex; gap: 4px; flex-wrap: wrap; }
+  .nav-links a { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-muted); border: none; padding: 5px 11px; border-radius: 2px; transition: background .15s, color .15s; }
+  .nav-links a:hover { background: var(--teal-soft); color: var(--teal); }
+  .nav-links a[aria-current="true"] { background: var(--teal); color: #fff; }
+
+  /* ===== Hero ===== */
+  header.hero { padding: 68px 0 0; }
+  .eyebrow { font-family: var(--font-mono); font-size: 12.5px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-faint); }
+  .eyebrow b { color: var(--teal); font-weight: 600; }
+  h1.hook { font-family: var(--font-display); font-weight: 700; color: var(--ink); font-size: clamp(34px, 6.2vw, 58px); line-height: 1.08; letter-spacing: -0.02em; margin-top: 18px; max-width: 800px; }
+  h1.hook em { font-style: normal; color: var(--teal-mid); }
+  .lede { margin-top: 22px; max-width: 660px; font-size: 19.5px; line-height: 1.6; color: var(--ink-muted); }
+  .lede strong { color: var(--ink); font-weight: 600; }
+
+  /* the scene */
+  .scene { margin-top: 40px; background: var(--surface); border: 1px solid var(--border); border-radius: 3px; overflow: hidden; }
+  .scene-head { display: flex; justify-content: space-between; gap: 12px; padding: 12px 24px; border-bottom: 1px solid var(--border); font-family: var(--font-mono); font-size: 11.5px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-faint); }
+  .scene-head b { color: var(--amber); font-weight: 500; }
+  .scene-body { padding: 24px 24px 20px; }
+  .scene-lines { list-style: none; display: grid; gap: 10px; }
+  .scene-lines li { display: grid; grid-template-columns: 92px 1fr; gap: 14px; align-items: baseline; font-size: 17.5px; line-height: 1.5; }
+  .scene-lines time { font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.04em; color: var(--teal-mid); }
+  .scene-lines li.bad time { color: var(--amber); }
+  .scene-lines li.bad span { color: var(--ink); }
+  .tl { margin-top: 24px; padding-top: 20px; border-top: 1px dashed var(--border); }
+  .tl-title { font-family: var(--font-mono); font-size: 11.5px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-faint); }
+  .tl-row { display: grid; grid-template-columns: 58px 1fr; gap: 14px; align-items: center; margin-top: 14px; }
+  .tl-label { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-muted); }
+  .tl-track { position: relative; height: 34px; background: var(--track); border-radius: 2px; overflow: hidden; }
+  .tl-bar { position: absolute; left: 0; top: 0; bottom: 0; width: var(--w); }
+  .tl-bar.before { background: var(--amber-soft); border-right: 3px solid var(--amber); }
+  .tl-bar.now { background: var(--teal); }
+  .tl-val { position: absolute; top: 0; bottom: 0; display: flex; align-items: center; font-family: var(--font-mono); font-size: 13px; font-weight: 500; white-space: nowrap; }
+  .tl-val.before { right: 14px; color: var(--amber); }
+  .tl-val.now { left: calc(var(--w) + 12px); color: var(--teal); }
+  .tl-axis { display: grid; grid-template-columns: 58px 1fr; gap: 14px; margin-top: 6px; }
+  .tl-ticks { display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: 10.5px; color: var(--ink-faint); }
+  .tl-note { margin-top: 14px; font-family: var(--font-mono); font-size: 11.5px; line-height: 1.55; color: var(--ink-faint); }
+  .js .tl-bar { width: 0; }
+  .js .scene.go .tl-bar.before { width: var(--w); transition: width 3.2s cubic-bezier(.25,.6,.2,1); }
+  .js .scene.go .tl-bar.now { width: var(--w); transition: width .4s ease .5s; }
+  .js .tl-val { opacity: 0; }
+  .js .scene.go .tl-val.before { opacity: 1; transition: opacity .5s ease 2.7s; }
+  .js .scene.go .tl-val.now { opacity: 1; transition: opacity .4s ease .9s; }
+  @media (prefers-reduced-motion: reduce) {
+    .js .tl-bar.before, .js .tl-bar.now { width: var(--w) !important; transition: none !important; }
+    .js .tl-val { opacity: 1 !important; transition: none !important; }
+  }
+
+  .turn { margin-top: 30px; max-width: 700px; font-size: 20px; line-height: 1.55; color: var(--ink); }
+  .turn em { font-style: normal; font-family: var(--font-display); font-weight: 700; color: var(--teal-mid); }
+
+  /* proof strip */
+  .proof { margin-top: 30px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); }
+  .proof > div { background: var(--surface); padding: 20px 20px 18px; }
+  .proof .num { font-family: var(--font-display); font-weight: 700; font-size: clamp(28px, 4.2vw, 40px); line-height: 1.05; color: var(--teal); letter-spacing: -0.01em; }
+  .proof .lab { margin-top: 8px; font-size: 14.5px; line-height: 1.45; color: var(--ink-muted); }
+  .proof .lab b { font-family: var(--font-mono); font-weight: 500; font-size: 11.5px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-faint); display: block; margin-bottom: 3px; }
+  @media (max-width: 720px) { .proof { grid-template-columns: 1fr; } .proof > div { display: grid; grid-template-columns: 112px 1fr; gap: 14px; align-items: center; padding: 16px 18px; } .proof .lab { margin-top: 0; } }
+
+  /* tour */
+  .tour-wrap { margin-top: 52px; }
+  .tour-head { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+  .tour-head h2 { font-family: var(--font-display); font-weight: 700; font-size: clamp(22px, 3.2vw, 28px); letter-spacing: -0.01em; color: var(--ink); }
+  .tour-head .eyebrow { color: var(--teal); }
+  .tour-sub { margin-top: 6px; max-width: 640px; font-size: 16.5px; color: var(--ink-muted); line-height: 1.55; }
+  ol.tour { list-style: none; margin-top: 22px; position: relative; }
+  ol.tour::before { content: ''; position: absolute; left: 33px; top: 34px; bottom: 34px; width: 2px; background: var(--border); }
+  ol.tour li + li { margin-top: 10px; }
+  ol.tour a.step { position: relative; display: grid; grid-template-columns: 40px 1fr auto 24px; gap: 16px; align-items: center; background: var(--surface); border: 1px solid var(--border); border-radius: 3px; padding: 14px 18px 14px 14px; color: var(--ink); border-bottom: 1px solid var(--border); transition: border-color .15s, box-shadow .15s, transform .15s; }
+  ol.tour a.step:hover { border-color: var(--teal); box-shadow: 0 2px 14px rgba(20,110,108,0.10); transform: translateX(2px); color: var(--ink); }
+  .t-num { width: 40px; height: 40px; display: grid; place-items: center; font-family: var(--font-mono); font-weight: 600; font-size: 13px; color: var(--teal); background: var(--teal-soft); border-radius: 50%; position: relative; z-index: 1; }
+  .t-main { display: block; min-width: 0; }
+  .t-main b { display: block; font-family: var(--font-display); font-weight: 700; font-size: 17px; line-height: 1.25; color: var(--ink); }
+  .t-main span { display: block; margin-top: 3px; font-size: 15.5px; line-height: 1.45; color: var(--ink-muted); }
+  .t-proof { font-family: var(--font-mono); font-size: 11.5px; letter-spacing: 0.04em; color: var(--teal); background: var(--teal-soft); padding: 4px 10px; border-radius: 2px; white-space: nowrap; }
+  .t-proof.amber { background: var(--amber-soft); color: var(--amber); }
+  .t-go { font-family: var(--font-mono); font-size: 16px; color: var(--ink-faint); }
+  .tour-legend { margin-top: 18px; font-family: var(--font-mono); font-size: 12px; line-height: 1.7; color: var(--ink-faint); }
+  .tour-legend b { color: var(--ink-muted); font-weight: 500; }
+  @media (max-width: 700px) {
+    ol.tour a.step { grid-template-columns: 40px 1fr 18px; gap: 12px; padding: 12px; }
+    ol.tour::before { left: 33px; }
+    .t-num { width: 40px; height: 40px; }
+    .t-proof { grid-column: 2 / 3; grid-row: 2; justify-self: start; margin-top: 2px; white-space: normal; }
+    .t-go { grid-row: 1; grid-column: 3; }
+  }
+
+  header.hero .signal { margin-top: 56px; }
+
+  /* ===== signal divider ===== */
+  .signal { position: relative; width: 100%; height: 56px; overflow: hidden; }
+  .signal svg { width: 100%; height: 100%; display: block; }
+  .signal path { fill: none; stroke: var(--border); stroke-width: 1.5; }
+  .signal .pulse { position: absolute; top: 50%; left: -6%; width: 8px; height: 8px; margin-top: -4px; border-radius: 50%; background: var(--teal); box-shadow: 0 0 0 5px var(--teal-soft); }
+  @media (prefers-reduced-motion: no-preference) { .signal .pulse { animation: travel 7s linear infinite; } }
+  @keyframes travel { 0% { left: -6%; } 100% { left: 106%; } }
+
+  /* ===== Case studies ===== */
+  section.case { position: relative; padding-top: 60px; padding-bottom: 44px; }
+  .case-num { position: absolute; right: 32px; top: 30px; font-family: var(--font-display); font-weight: 700; font-size: clamp(88px, 16vw, 168px); line-height: 1; letter-spacing: -0.04em; color: #E8ECF0; z-index: 0; user-select: none; pointer-events: none; }
+  .case > *:not(.case-num) { position: relative; z-index: 1; }
+  .case-eyebrow { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--teal); display: flex; align-items: center; gap: 9px; }
+  .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--teal); display: inline-block; }
+  h2.case-title { font-family: var(--font-display); font-weight: 700; color: var(--ink); font-size: clamp(28px, 4.4vw, 42px); line-height: 1.12; margin-top: 10px; letter-spacing: -0.015em; max-width: 720px; }
+  .case-hook { font-family: var(--font-display); font-weight: 500; font-size: clamp(17px, 2.2vw, 20px); line-height: 1.45; color: var(--ink-muted); margin-top: 10px; max-width: 680px; }
+  .badge { display: inline-flex; align-items: center; gap: 7px; font-family: var(--font-mono); font-size: 11.5px; letter-spacing: 0.08em; text-transform: uppercase; padding: 5px 12px; border-radius: 2px; margin-top: 16px; }
+  .badge-dot { width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+  .badge.live { background: var(--teal-soft); color: var(--teal); border: 1px solid #A8CFCB; }
+  .badge.poc { background: var(--amber-soft); color: var(--amber); border: 1px solid var(--amber-line); }
+  .badge.open { background: var(--surface); color: var(--amber); border: 1px dashed var(--amber); }
+
+  .case-body { margin-top: 30px; }
+  .block { margin-top: 34px; }
+  .block-label { font-family: var(--font-mono); font-size: 11.5px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-faint); margin-bottom: 10px; display: flex; align-items: center; gap: 10px; }
+  .block-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+  .block p { max-width: 700px; }
+  .block p + p { margin-top: 14px; }
+
+  .role { margin-top: 26px; max-width: 700px; padding: 14px 20px; background: var(--surface); border: 1px solid var(--border); border-left: 3px solid var(--teal); border-radius: 0 3px 3px 0; }
+  .role .k { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--teal); }
+  .role p { margin-top: 4px; font-size: 16.5px; line-height: 1.6; color: var(--ink); }
+
+  .callout { margin-top: 18px; max-width: 700px; padding: 14px 20px; background: var(--teal-soft); border-radius: 3px; font-size: 16.5px; line-height: 1.55; color: var(--ink); }
+  .callout.amber { background: var(--amber-soft); border: 1px dashed var(--amber); }
+  .callout.amber b { color: var(--amber); }
+  .callout b { font-family: var(--font-mono); font-weight: 600; font-size: 11.5px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--teal); display: block; margin-bottom: 2px; }
+
+  .diagram { margin-top: 34px; border: 1px solid var(--border); background: var(--surface); padding: 20px 20px 14px; border-radius: 3px; }
+  .diagram .scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .diagram svg { width: 100%; height: auto; display: block; }
+  .diagram .cap { margin-top: 12px; font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-faint); line-height: 1.55; }
+  .diagram .read { margin-top: 8px; font-size: 15.5px; line-height: 1.55; color: var(--ink-muted); max-width: 720px; }
+  .hint { display: none; margin-top: 10px; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--amber); }
+  @media (max-width: 760px) { .diagram .scroll svg { min-width: 700px; } .hint { display: block; } .diagram { padding: 16px 14px 12px; } }
+
+  .decision { margin-top: 34px; border: 1px solid var(--border); border-radius: 3px; background: var(--surface); overflow: hidden; }
+  .decision-head { padding: 13px 22px; border-bottom: 1px solid var(--border); font-family: var(--font-mono); font-size: 11.5px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-muted); }
+  .decision-grid { display: grid; grid-template-columns: 1fr 1fr; }
+  .decision-col { padding: 20px 22px; border-left: 3px solid transparent; }
+  .decision-col + .decision-col { border-left: 1px solid var(--border); }
+  .decision-col.considered { border-left-color: var(--amber); background: var(--amber-soft); }
+  .decision-col.chosen { border-left-color: var(--teal); background: var(--teal-soft); }
+  .decision-col.chosen + .decision-col, .decision-col.chosen { }
+  .decision-col.open { background: var(--surface); border-left-color: var(--amber); border-left-style: dashed; }
+  .decision-col h4 { font-family: var(--font-display); font-size: 15.5px; font-weight: 700; margin-bottom: 7px; }
+  .decision-col.considered h4, .decision-col.open h4 { color: var(--amber); }
+  .decision-col.chosen h4 { color: var(--teal); }
+  .decision-col p { font-size: 15.5px; max-width: none; line-height: 1.6; }
+  .decision-also { padding: 13px 22px; border-top: 1px solid var(--border); font-size: 15px; line-height: 1.55; color: var(--ink-muted); background: var(--surface); }
+  .decision-also b { font-family: var(--font-mono); font-weight: 500; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-faint); margin-right: 6px; }
+  @media (max-width: 600px) {
+    .decision-grid { grid-template-columns: 1fr; }
+    .decision-col + .decision-col { border-left: 3px solid var(--teal); border-top: 1px solid var(--border); }
+    .decision-col.open + .decision-col.open { border-left: 3px dashed var(--amber); }
+  }
+
+  .stats { margin-top: 4px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); }
+  .stat { background: var(--surface); padding: 20px 16px 18px; }
+  .stat .num { font-family: var(--font-mono); font-weight: 600; font-size: clamp(20px, 2.8vw, 27px); color: var(--teal); line-height: 1.1; white-space: nowrap; }
+  .stat .label { margin-top: 8px; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.05em; text-transform: uppercase; color: var(--ink-muted); line-height: 1.5; }
+  .stat .label small { display: block; margin-top: 3px; text-transform: none; letter-spacing: 0; font-size: 11px; color: var(--ink-faint); }
+  .stats.amber .stat .num { color: var(--amber); }
+  @media (max-width: 680px) { .stats { grid-template-columns: repeat(2, 1fr); } }
+  .stat-note { margin-top: 10px; font-family: var(--font-mono); font-size: 11.5px; line-height: 1.55; color: var(--ink-faint); max-width: 760px; }
+
+  /* unlocked cards */
+  .unlock { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 4px; }
+  .u-card { background: var(--surface); border: 1px solid var(--border); border-top: 3px solid var(--teal); border-radius: 0 0 3px 3px; padding: 16px 18px 16px; }
+  .u-card h4 { font-family: var(--font-display); font-weight: 700; font-size: 16px; line-height: 1.3; color: var(--ink); }
+  .u-card p { margin-top: 6px; font-size: 15px; line-height: 1.55; color: var(--ink-muted); max-width: none; }
+  .u-card .m { margin-top: 8px; font-family: var(--font-mono); font-size: 11.5px; letter-spacing: 0.04em; color: var(--teal); }
+  @media (max-width: 680px) { .unlock { grid-template-columns: 1fr; } }
+
+  /* progress stepper (probe case) */
+  ol.stepper { list-style: none; display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; margin-top: 4px; }
+  ol.stepper li { position: relative; padding: 0 10px 0 0; }
+  ol.stepper li::before { content: ''; position: absolute; left: 22px; right: 0; top: 11px; height: 2px; background: var(--border); }
+  ol.stepper li:last-child::before { display: none; }
+  ol.stepper li.done::before { background: var(--teal-mid); }
+  .st-dot { position: relative; z-index: 1; width: 24px; height: 24px; border-radius: 50%; background: var(--surface); border: 2px solid var(--border); display: grid; place-items: center; font-family: var(--font-mono); font-size: 11px; color: var(--ink-faint); }
+  li.done .st-dot { background: var(--teal-mid); border-color: var(--teal-mid); color: #fff; }
+  li.now .st-dot { border-color: var(--amber); background: var(--amber-soft); color: var(--amber); box-shadow: 0 0 0 4px rgba(139,69,19,0.10); }
+  .st-t { margin-top: 10px; font-family: var(--font-display); font-weight: 700; font-size: 15px; line-height: 1.25; color: var(--ink); }
+  .st-s { margin-top: 2px; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-faint); }
+  li.now .st-s { color: var(--amber); }
+  li.todo .st-t { color: var(--ink-faint); }
+  @media (max-width: 560px) {
+    ol.stepper { grid-template-columns: 1fr; gap: 14px; }
+    ol.stepper li { display: grid; grid-template-columns: 24px 1fr; gap: 0 12px; padding: 0; }
+    ol.stepper li::before { left: 11px; right: auto; top: 24px; bottom: -14px; width: 2px; height: auto; }
+    .st-t { margin-top: 0; } .st-s { grid-column: 2; }
+  }
+
+  /* under the hood */
+  details.deep { margin-top: 34px; border: 1px solid var(--border); border-radius: 3px; background: var(--surface); }
+  details.deep summary { list-style: none; cursor: pointer; padding: 15px 22px; display: flex; align-items: center; justify-content: space-between; gap: 12px; font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-muted); }
+  details.deep summary::-webkit-details-marker { display: none; }
+  details.deep summary small { font-size: 11px; letter-spacing: 0.04em; text-transform: none; color: var(--ink-faint); margin-left: 8px; }
+  details.deep summary::after { content: '+'; font-size: 18px; line-height: 1; color: var(--teal); transition: transform .2s; }
+  details.deep[open] summary::after { content: '–'; }
+  details.deep[open] summary { border-bottom: 1px solid var(--border); }
+  details.deep summary:hover { background: var(--bg); }
+  .deep-body { padding: 8px 22px 20px; }
+  .deep-body dl { display: grid; grid-template-columns: 150px 1fr; gap: 0 20px; }
+  .deep-body dt { padding: 12px 0; font-family: var(--font-mono); font-size: 11.5px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--teal); border-top: 1px solid var(--border); }
+  .deep-body dd { padding: 10px 0; font-size: 15.5px; line-height: 1.6; color: var(--ink); border-top: 1px solid var(--border); }
+  .deep-body dt:first-of-type, .deep-body dt:first-of-type + dd { border-top: none; }
+  .deep-body code { font-family: var(--font-mono); font-size: 13px; background: var(--bg); padding: 1px 3px; border-radius: 2px; color: var(--ink-muted); }
+  @media (max-width: 640px) { .deep-body dl { grid-template-columns: 1fr; } .deep-body dt { padding: 12px 0 0; border-top: 1px solid var(--border); } .deep-body dd { padding: 4px 0 10px; border-top: none; } }
+
+  .reflection { margin-top: 34px; padding: 18px 24px; border-left: 2px solid var(--teal); background: var(--surface); }
+  .reflection p { font-style: italic; color: var(--ink-muted); max-width: 660px; font-size: 17px; }
+  .next { margin-top: 26px; display: flex; justify-content: flex-end; }
+  .next a { font-family: var(--font-mono); font-size: 12.5px; letter-spacing: 0.08em; text-transform: uppercase; border: 1px solid var(--border); background: var(--surface); padding: 10px 16px; border-radius: 2px; color: var(--teal); transition: border-color .15s, background .15s; }
+  .next a:hover { border-color: var(--teal); background: var(--teal-soft); color: var(--teal); }
+
+  footer { padding: 40px 0 76px; }
+  footer .signal { margin-bottom: 40px; }
+  .foot-grid { display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 20px; }
+  footer h3 { font-family: var(--font-display); font-size: 22px; font-weight: 700; color: var(--ink); }
+  footer .more { font-family: var(--font-mono); font-size: 12px; color: var(--ink-faint); margin-top: 5px; }
+  footer .ask { margin-top: 14px; max-width: 520px; font-size: 16px; color: var(--ink-muted); line-height: 1.55; }
+  .hero-links { display: flex; gap: 14px; flex-wrap: wrap; font-family: var(--font-mono); font-size: 13px; }
+  .hero-links a { border: 1px solid var(--border); background: var(--surface); padding: 10px 16px; border-radius: 2px; color: var(--ink-muted); }
+  .hero-links a:hover { color: var(--teal); border-color: var(--teal); }
+
+  .reveal { opacity: 0; transform: translateY(16px); transition: opacity .55s ease, transform .55s ease; }
+  .reveal.in { opacity: 1; transform: translateY(0); }
+  .no-js .reveal { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; transition: none; } ol.tour a.step { transition: none; } }
+
+  @media (max-width: 520px) {
+    body { font-size: 16.5px; }
+    .wrap { padding: 0 20px; }
+    .nav-inner { padding: 0 20px; flex-wrap: wrap; gap: 4px 12px; }
+    .nav-links { gap: 2px; margin-left: -8px; }
+    .nav-links a { font-size: 10.5px; padding: 4px 7px; letter-spacing: 0.04em; }
+    header.hero { padding-top: 40px; }
+    .lede { font-size: 17.5px; } .turn { font-size: 18px; }
+    .scene-body { padding: 18px 16px 16px; } .scene-head { padding: 11px 16px; flex-direction: column; gap: 2px; }
+    .scene-lines li { grid-template-columns: 1fr; gap: 0; font-size: 16.5px; }
+    .tl-row, .tl-axis { grid-template-columns: 44px 1fr; gap: 10px; }
+    .tl-val { font-size: 12px; } .tl-val.before { right: 8px; }
+    section.case { padding-top: 44px; padding-bottom: 36px; }
+    .case-num { right: 20px; top: 26px; font-size: 76px; }
+    .stat .num { font-size: 22px; }
+  }
+
+</style>
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to the case studies</a>
+<div class="progress" aria-hidden="true"><i id="bar"></i></div>
+
+<nav class="top" aria-label="Case studies">
+  <div class="nav-inner">
+    <a class="nav-name" href="#top">Aashrav Shah</a>
+    <div class="nav-links">
+      <a href="#fleet">Fleet</a>
+      <a href="#streaming">Streaming</a>
+      <a href="#genai">GenAI</a>
+      <a href="#agents">Agents</a>
+      <a href="#probes">Probes</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="wrap">
+    <div class="eyebrow"><b>Aashrav Shah</b> · Senior Technical Product Manager · GE HealthCare · Bengaluru</div>
+    <h1 class="hook">A hospital device fails. The data that explains why <em>shouldn’t arrive a day late.</em></h1>
+    <p class="lede">I’m <strong>an engineer-turned-product-manager</strong> building the data and AI products that get the right signal to the right person in time to act — in regulated healthcare, at GE HealthCare.</p>
+
+    <div class="scene" id="scene">
+      <div class="scene-head"><span>The scene</span><span><b>Illustrative</b> · the numbers below are real</span></div>
+      <div class="scene-body">
+        <ul class="scene-lines">
+          <li><time>02:14</time><span>A portable anesthesia machine throws an error mid-shift.</span></li>
+          <li><time>02:15</time><span>Its log joins a batch queue, to be processed in bulk.</span></li>
+          <li class="bad"><time>Next day</time><span>An engineer finally sees it. The window to act has closed.</span></li>
+        </ul>
+        <div class="tl" role="img" aria-label="Bar chart drawn to scale: fault-detection data took up to 24 hours before, and about 20 minutes now">
+          <div class="tl-title">Same error, two timelines — drawn to scale</div>
+          <div class="tl-row">
+            <div class="tl-label">Before</div>
+            <div class="tl-track" style="--w:100%"><div class="tl-bar before"></div><div class="tl-val before">up to 24 hours</div></div>
+          </div>
+          <div class="tl-row">
+            <div class="tl-label">Now</div>
+            <div class="tl-track" style="--w:1.4%"><div class="tl-bar now"></div><div class="tl-val now">about 20 minutes</div></div>
+          </div>
+          <div class="tl-axis"><span></span><div class="tl-ticks"><span>0</span><span>6 h</span><span>12 h</span><span>18 h</span><span>24 h</span></div></div>
+          <div class="tl-note">Measured as data availability for fault detection: up to 24 hours before the streaming platform, about 20 minutes after.</div>
+        </div>
+      </div>
+    </div>
+
+    <p class="turn">That gap is the work. Five products, one thread: <em>get the right data to the right person in time to act.</em></p>
+
+    <div class="proof">
+      <div><div class="num" data-to="6" data-pre="$" data-suf="M+">$6M+</div><div class="lab"><b>Fleet product, 0→1</b>Revenue influenced; 40% less downtime across 100+ hospitals</div></div>
+      <div><div class="num" data-to="5" data-suf="TB+">5TB+</div><div class="lab"><b>Streaming platform</b>Telemetry a day, near real time, HIPAA-compliant</div></div>
+      <div><div class="num" data-to="60" data-suf="%">60%</div><div class="lab"><b>GenAI assistant</b>Faster diagnostic response: about 1 hour down to 24 minutes</div></div>
+    </div>
+
+    <div class="tour-wrap" id="tour">
+      <div class="tour-head">
+        <h2>Start here: a 60-second tour</h2>
+        <span class="eyebrow">5 cases · tap any</span>
+      </div>
+      <p class="tour-sub">Read the five one-liners, then open the case closest to the problem you’re hiring for.</p>
+      <ol class="tour">
+        <li><a class="step" href="#fleet"><span class="t-num">01</span><span class="t-main"><b>Fleet management</b><span>Gets a device’s logs to hospital engineers when they need them, not on a schedule.</span></span><span class="t-proof">$6M+ influenced</span><span class="t-go" aria-hidden="true">→</span></a></li>
+        <li><a class="step" href="#streaming"><span class="t-num">02</span><span class="t-main"><b>IoT streaming platform</b><span>The pipeline underneath: 5TB+ a day, available in minutes instead of up to a day.</span></span><span class="t-proof">24 h → 20 min</span><span class="t-go" aria-hidden="true">→</span></a></li>
+        <li><a class="step" href="#genai"><span class="t-num">03</span><span class="t-main"><b>GenAI assistant</b><span>Ask in plain language; get an answer grounded in manuals and machine data.</span></span><span class="t-proof">60% faster</span><span class="t-go" aria-hidden="true">→</span></a></li>
+        <li><a class="step" href="#agents"><span class="t-num">04</span><span class="t-main"><b>AI agents for the software lifecycle</b><span>Two agents take the first pass at writing engineering stories and checking finished work.</span></span><span class="t-proof">50–70% time saved</span><span class="t-go" aria-hidden="true">→</span></a></li>
+        <li><a class="step" href="#probes"><span class="t-num">05</span><span class="t-main"><b>Probe intelligence</b><span>Three signals on ultrasound probes. The newest case, now in solutioning.</span></span><span class="t-proof amber">$50M sized</span><span class="t-go" aria-hidden="true">→</span></a></li>
+      </ol>
+      <p class="tour-legend">Every case has three layers: <b>the story</b> (30 seconds) · <b>the decision I made</b> (a minute) · <b>under the hood</b> (open on demand, for the technical reader).</p>
+    </div>
+  </div>
+  <div class="signal" aria-hidden="true"><svg viewBox="0 0 600 56" preserveAspectRatio="none"><path d="M0,28 L220,28 L238,8 L252,48 L266,28 L600,28"/></svg><div class="pulse"></div></div>
+</header>
+
+<main id="main">
+
+<!-- ======== CASE 1: FLEET ======== -->
+<section class="case wrap reveal" id="fleet" data-title="Fleet">
+  <div class="case-num" aria-hidden="true">01</div>
+  <div class="case-eyebrow"><span class="dot"></span>Case 01 · 0→1 product</div>
+  <h2 class="case-title">Fleet Management Platform</h2>
+  <p class="case-hook">Hospitals lose hours to device failures the data could have flagged, if it had arrived in time.</p>
+  <span class="badge live"><span class="badge-dot"></span>Live · streaming path launching</span>
+
+  <div class="case-body">
+    <div class="block">
+      <div class="block-label">The story</div>
+      <p>Services are a significant part of GE HealthCare’s revenue, but smaller, portable devices (the kind carried from room to room, like anesthesia machines) often had no hospital service contract behind them. I interviewed 20+ biomedical engineers and the real problem came into focus: device logs arrived on a schedule, so by the time an engineer saw a failure, the window to act had closed.</p>
+      <p>It wasn’t an analytics problem. It was a <em>delivery</em> problem. So I led strategy and roadmap for a fleet management product, built from scratch and sold to hospitals, that lets an engineer get the log they need when they need it.</p>
+    </div>
+
+    <div class="role"><div class="k">My role</div><p>Led product strategy and roadmap from discovery to launch, delivered in six months. I put the connection to the IoT gateway first, because everything else depended on it, and worked with the IoT team (who didn’t report to me) to build it.</p></div>
+
+    <div class="diagram">
+      <div class="scroll"><svg viewBox="0 0 860 410" role="img" aria-label="Fleet architecture: an engineer requests a log, the IoT gateway retrieves it from the device, a message passes through SNS and SQS, the log is copied to our S3 bucket, and secure APIs let engineers search and download it in the fleet product. A launching streaming lane reuses the same feed through Kafka, the data lake and an API. The earlier scheduled batch path had hours of delay." xmlns="http://www.w3.org/2000/svg"><defs><marker id="f1-t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#0D3D3B"/></marker><marker id="f1-g" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#556B7F"/></marker><marker id="f1-a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#8B4513"/></marker></defs><text x="16" y="46" text-anchor="start" font-family="IBM Plex Mono, monospace" font-size="11" font-weight="500" fill="#0D3D3B" letter-spacing="1.2">LIVE · LOG DELIVERY (ON REQUEST + AUTOMATIC)</text><rect x="16" y="64" width="118" height="72" rx="3" fill="#FFFFFF" stroke="#161D29" stroke-width="1"/><text x="75.0" y="97.0" text-anchor="middle" font-family="Space Grotesk, sans-serif" font-size="13" font-weight="700" fill="#161D29">Medical device</text><text x="75.0" y="113.0" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10.5" font-weight="400" fill="#3E4756">error occurs</text><path d="M135,100 H157" fill="none" stroke="#0D3D3B" stroke-width="2" marker-end="url(#f1-t)"/><rect x="158" y="64" width="118" height="72" rx="3" fill="#FFFFFF" stroke="#161D29" stroke-width="1"/><text x="217.0" y="90.0" text-anchor="middle" font-family="Space Grotesk, sans-serif" font-size="13" font-weight="700" fill="#161D29">IoT gateway</text><text x="217.0" y="106.0" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10.5" font-weight="400" fill="#3E4756">retrieves the log</text><text x="217.0" y="120.0" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10.5" font-weight="400" fill="#3E4756">from the device</text><path d="M277,100 H299" fill="none" stroke="#0D3D3B" stroke-width="2" marker-end="url(#f1-t)"/><rect x="300" y="64" width="118" height="72" rx="3" fill="#FFFFFF" stroke="#161D29" stroke-width="1"/><text x="359.0" y="90.0" text-anchor="middle" font-family="Space Grotesk, sans-serif" font-size="13" font-weight="700" fill="#161D29">SNS → SQS</text><text x="359.0" y="106.0" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10.5" font-weight="400" fill="#3E4756">file-location</text><text x="359.0" y="120.0" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10.5" font-weight="400" fill="#3E4756">message + queue</text><path d="M419,100 H441" fill="none" stroke="#0D3D3B" stroke-width="2" marker-end="url(#f1-t)"/><rect x="442" y="64" width="118" height="72" rx="3" fill="#FFFFFF" stroke="#161D29" stroke-width="1"/><text x="501.0" y="90.0" text-anchor="middle" font-family="Space Grotesk, sans-serif" font-size="13" font-weight="700" fill="#161D29">Our S3 bucket</text><text x="501.0" y="106.0" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10.5" font-weight="400" fill="#3E4756">log copy +</text><text x="501.0" y="120.0" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10.5" font-weight="400" fill="#3E4756">auto-replication</text><path d="M561,100 H583" fill="none" stroke="#0D3D3B" stroke-width="2" marker-end="url(#f1-t)"/><rect x="584" y="64" width="118" height="72" rx="3" fill="#D0E8E6" stroke="#0D3D3B" stroke-width="1.5"/><text x="643.0" y="90.0" text-anchor="middle" font-family="Space Grotesk, sans-serif" font-size="13" font-weight="700" fill="#0D3D3B">Secure APIs</text><text x="643.0" y="106.0" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10.5" font-weight="400" fill="#0D3D3B">search · download</text><text x="643.0" y="120.0" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10.5" font-weight="400" fill="#0D3D3B">by ETag</text><path d="M703,100 H725" fill="none" stroke="#0D3D3B" stroke-width="2" marker-end="url(#f1-t)"/><rect x="726" y="64" width="118" height="256" rx="3" fill="#D0E8E6" stroke="#0D3D3B" stroke-width="1.5"/><text x="785.0" y="175.0" text-anchor="middle" font-family="Space Grotesk, sans-serif" font-size="15" font-weight="700" fill="#0D3D3B">Fleet product</text><text x="785.0" y="191.0" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10.5" font-weight="400" fill="#0D3D3B">biomedical and</text><text x="785.0" y="205.0" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10.5" font-weight="400" fill="#0D3D3B">field-service</text><text x="785.0" y="219.0" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10.5" font-weight="400" fill="#0D3D3B">engineers</text><text x="374" y="238" text-anchor="start" font-family="IBM Plex Mono, monospace" font-size="11" font-weight="500" fill="#8B4513" letter-spacing="1.2">LAUNCHING · STREAMING TELEMETRY</text><path d="M359,139 V247" fill="none" stroke="#0D3D3B" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#f1-t)"/><text x="369" y="196" text-anchor="start" font-family="IBM Plex Mono, monospace" font-size="10.5" font-weight="400" fill="#8B4513">same SNS/SQS feed</text><rect x="300" y="248" width="118" height="72" rx="3" fill="#FFFFFF" stroke="#0D3D3B" stroke-width="1.5" stroke-dasharray="5 4"/><text x="359.0" y="281.0" text-anchor="middle" font-family="Space Grotesk, sans-serif" font-size="13" font-weight="700" fill="#161D29">Amazon MSK</text><text x="359.0" y="297.0" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10.5" font-weight="400" fill="#3E4756">Kafka · streaming</text><rect x="442" y="248" width="118" height="72" rx="3" fill="#FFFFFF" stroke="#0D3D3B" stroke-width="1.5" stroke-dasharray="5 4"/><text x="501.0" y="274.0" text-anchor="middle" font-family="Space Grotesk, sans-serif" font-size="13" font-weight="700" fill="#161D29">Data lake</text><text x="501.0" y="290.0" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10.5" font-weight="400" fill="#3E4756">same route as</text><text x="501.0" y="304.0" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10.5" font-weight="400" fill="#3E4756">case 02</text><rect x="584" y="248" width="118" height="72" rx="3" fill="#FFFFFF" stroke="#0D3D3B" stroke-width="1.5" stroke-dasharray="5 4"/><text x="643.0" y="274.0" text-anchor="middle" font-family="Space Grotesk, sans-serif" font-size="13" font-weight="700" fill="#161D29">API</text><text x="643.0" y="290.0" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10.5" font-weight="400" fill="#3E4756">feeds the</text><text x="643.0" y="304.0" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10.5" font-weight="400" fill="#3E4756">fleet product</text><path d="M419,284 H441" fill="none" stroke="#0D3D3B" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#f1-t)"/><path d="M561,284 H583" fill="none" stroke="#0D3D3B" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#f1-t)"/><path d="M703,284 H725" fill="none" stroke="#0D3D3B" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#f1-t)"/><text x="90" y="238" text-anchor="start" font-family="IBM Plex Mono, monospace" font-size="11" font-weight="500" fill="#556B7F" letter-spacing="1.2">WHAT IT REPLACED</text><path d="M75,139 V247" fill="none" stroke="#556B7F" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#f1-g)"/><rect x="16" y="248" width="260" height="72" rx="3" fill="#F5F6F8" stroke="#556B7F" stroke-width="1" stroke-dasharray="4 3"/><text x="146.0" y="274.0" text-anchor="middle" font-family="Space Grotesk, sans-serif" font-size="13" font-weight="700" fill="#556B7F">Before: scheduled batch</text><text x="146.0" y="290.0" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10.5" font-weight="400" fill="#556B7F">logs processed in bulk</text><text x="146.0" y="304.0" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10.5" font-weight="400" fill="#556B7F">hours of delay</text><line x1="16" y1="366" x2="46" y2="366" stroke="#0D3D3B" stroke-width="2"/><text x="54" y="370" text-anchor="start" font-family="IBM Plex Mono, monospace" font-size="10.5" font-weight="400" fill="#3E4756">live</text><line x1="106.4" y1="366" x2="136.4" y2="366" stroke="#0D3D3B" stroke-width="2" stroke-dasharray="6 4"/><text x="144.4" y="370" text-anchor="start" font-family="IBM Plex Mono, monospace" font-size="10.5" font-weight="400" fill="#3E4756">launching</text><line x1="229.8" y1="366" x2="259.8" y2="366" stroke="#556B7F" stroke-width="2" stroke-dasharray="6 4"/><text x="267.8" y="370" text-anchor="start" font-family="IBM Plex Mono, monospace" font-size="10.5" font-weight="400" fill="#3E4756">before</text><text x="16" y="394" text-anchor="start" font-family="IBM Plex Mono, monospace" font-size="10.5" font-weight="400" fill="#3E4756">The 40% downtime result was measured on the live log-delivery path.</text></svg></div>
+      <div class="hint">Swipe the diagram sideways →</div>
+      <div class="cap">Fig 01 — Log delivery is live; streaming telemetry reuses the same pipeline</div>
+      <p class="read">Read it left to right: an engineer asks for a log, it’s fetched from the device and lands in our storage, and secure APIs let engineers search and download it. The dashed lane is the streaming path that is now launching.</p>
+    </div>
+
+    <div class="decision">
+      <div class="decision-head">Key decision — wait for the log, or fetch it on demand</div>
+      <div class="decision-grid">
+        <div class="decision-col considered">
+          <h4>Before: scheduled delivery</h4>
+          <p>Logs collected on a schedule and processed in bulk. Engineers see what already happened: fine for root cause, too late for prevention.</p>
+        </div>
+        <div class="decision-col chosen">
+          <h4>Chosen: on demand, plus automatic</h4>
+          <p>An engineer requests a log and it’s retrieved from the device; new files are also copied across automatically. Streaming telemetry follows on the same pipeline.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="block">
+      <div class="block-label">Impact</div>
+      <div class="stats">
+        <div class="stat"><div class="num" data-to="6" data-pre="$" data-suf="M+">$6M+</div><div class="label">Revenue influenced<small>from selling to hospitals</small></div></div>
+        <div class="stat"><div class="num" data-to="40" data-suf="%">40%</div><div class="label">Less device downtime<small>measured on the log-delivery path</small></div></div>
+        <div class="stat"><div class="num" data-to="100" data-suf="+">100+</div><div class="label">Hospitals</div></div>
+        <div class="stat"><div class="num" data-to="20" data-suf="+">20+</div><div class="label">Biomedical engineers interviewed</div></div>
+      </div>
+    </div>
+
+    <details class="deep">
+      <summary><span>Under the hood<small>for the technical reader</small></span></summary>
+      <div class="deep-body"><dl>
+        <dt>On demand</dt><dd>An engineer requests a log. The IoT service retrieves it from the device and publishes an <code>SNS</code> message with the file’s location. Our team reads it from <code>SQS</code> and copies the log into our <code>S3</code> bucket.</dd>
+        <dt>Automatic</dt><dd>An S3 replication rule copies new files arriving in the IoT bucket into ours.</dd>
+        <dt>Secure APIs</dt><dd>One API searches logs by date range and system ID. A second retrieves the selected log by its <code>ETag</code> and system ID so the engineer can download it.</dd>
+        <dt>Streaming (launching)</dt><dd>Telemetry arrives through the same SNS/SQS pipeline into our <code>MSK</code> cluster, reaches the data lake the same way as the streaming platform (case 02), and is fed to the fleet product through an API.</dd>
+        <dt>What I don’t claim</dt><dd>The 40% downtime result was measured on log delivery. Streaming telemetry is launching, so I don’t attribute results to it yet.</dd>
+      </dl></div>
+    </details>
+
+    <div class="reflection"><p>The engineers already knew what was wrong. That knowledge just needed to travel faster than the batch schedule allowed.</p></div>
+    <div class="next"><a href="#streaming">Next: the pipeline underneath →</a></div>
+  </div>
+</section>
+
+<div class="signal" aria-hidden="true"><svg viewBox="0 0 600 56" preserveAspectRatio="none"><path d="M0,28 L220,28 L238,8 L252,48 L266,28 L600,28"/></svg><div class="pulse"></div></div>
+
+<!-- ======== CASE 2: STREAMING ======== -->
+<section class="case wrap reveal" id="streaming" data-title="Streaming">
+  <div class="case-num" aria-hidden="true">02</div>
+  <div class="case-eyebrow"><span class="dot"></span>Case 02 · Data platform</div>
+  <h2 class="case-title">IoT Streaming Platform</h2>
+  <p class="case-hook">Moving 5TB+ of daily telemetry from batch to streaming, and everything that became possible once we did.</p>
+  <span class="badge live"><span class="badge-dot"></span>Live · HIPAA-compliant</span>
+
+  <div class="case-body">
+    <div class="block">
+      <div class="block-label">The story</div>
+      <p>At 5TB+ a day, batch had become the ceiling on everything: machine-learning models couldn’t run on fresh data, remote diagnostics worked hours behind, and onboarding a new team onto the data took around four months. The platform needed a new foundation, HIPAA-compliant throughout, and open to products that didn’t exist yet.</p>
+      <p>I started with service and remote engineers to find where latency actually changed a decision. Most needed data in <em>minutes</em>, not milliseconds, and that shaped both what we built and how we measured it.</p>
+    </div>
+
+    <div class="callout"><b>North Star</b>The share of critical use cases with data available in under five minutes. Not infrastructure latency; what the engineer actually experiences. The highest-value use cases went first, and the time-critical ones are still heading for under five.</div>
+
+    <div class="role"><div class="k">My role</div><p>Owned the vision and roadmap. Defined the North Star, matched the architecture and technology choice to what users needed, prioritized which use cases to onboard first, and tracked adoption, freshness, reliability and business impact.</p></div>
+
+    <div class="diagram">
+      <div class="scroll"><svg viewBox="0 0 860 500" role="img" aria-label="Streaming platform architecture: devices send telemetry through a Glue Schema Registry into Kafka on MSK, Spark on EMR processes it, and the output goes to three tiers: a near-real-time layer with Elasticsearch feeding anomaly alerts and Kibana dashboards, a hot RDS store serving APIs, and a cold S3 Parquet store queried through Athena." xmlns="http://www.w3.org/2000/svg"><defs><marker id="f2-t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#0D3D3B"/></marker><marker id="f2-g" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#556B7F"/></marker><marker id="f2-a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#8B4513"/></marker></defs><text x="16" y="16" text-anchor="start" font-family="IBM Plex Mono, monospace" font-size="10.5" font-weight="500" fill="#556B7F" letter-spacing="1.2">INGEST &amp; PROCESS</text><text x="290" y="16" text-anchor="start" font-family="IBM Plex Mono, monospace" font-size="10.5" font-weight="500" fill="#556B7F" letter-spacing="1.2">STORE</text><text x="600" y="16" text-anchor="start" font-family="IBM Plex Mono, monospace" font-size="10.5" font-weight="500" fill="#556B7F" letter-spacing="1.2">PRODUCTS READ FROM IT</text><g transform="translate(0,26)"><rect x="16" y="24" width="190" height="56" rx="3" fill="#FFFFFF" stroke="#161D29" stroke-width="1"/><text x="111.0" y="49.0" text-anchor="middle" font-family="Space Grotesk, sans-serif" font-size="13" font-weight="700" fill="#161D29">Medical devices</text><text x="111.0" y="65.0" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10.5" font-weight="400" fill="#3E4756">telemetry · logs · 5 formats</text><path d="M111,81 V105" fill="none" stroke="#0D3D3B" stroke-width="2" marker-end="url(#f2-t)"/><rect x="16" y="106" width="190" height="48" rx="3" fill="#FFFFFF" stroke="#161D29" stroke-width="1"/><text x="111.0" y="127.0" text-anchor="middle" font-family="Space Grotesk, sans-serif" font-size="13" font-weight="700" fill="#161D29">Glue Schema Registry</text><text x="111.0" y="143.0" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10.5" font-weight="400" fill="#3E4756">JSON · topic schemas</text><path d="M111,155 V179" fill="none" stroke="#0D3D3B" stroke-width="2" marker-end="url(#f2-t)"/><rect x="16" y="180" width="190" height="84" rx="3" fill="#D0E8E6" stroke="#0D3D3B" stroke-width="1.5"/><text x="111.0" y="212.0" text-anchor="middle" font-family="Space Grotesk, sans-serif" font-size="16" font-weight="700" fill="#0D3D3B">Kafka on MSK</text><text x="111.0" y="228.0" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10.5" font-weight="400" fill="#0D3D3B">5TB+/day · HIPAA</text><text x="111.0" y="242.0" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10.5" font-weight="400" fill="#0D3D3B">replay on demand</text><path d="M111,265 V289" fill="none" stroke="#0D3D3B" stroke-width="2" marker-end="url(#f2-t)"/><rect x="16" y="290" width="190" height="56" rx="3" fill="#FFFFFF" stroke="#161D29" stroke-width="1"/><text x="111.0" y="315.0" text-anchor="middle" font-family="Space Grotesk, sans-serif" font-size="13" font-weight="700" fill="#161D29">Spark on EMR</text><text x="111.0" y="331.0" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10.5" font-weight="400" fill="#3E4756">PySpark · transform</text><path d="M206,318 H250" fill="none" stroke="#0D3D3B" stroke-width="2"/><path d="M250,68 V368" fill="none" stroke="#0D3D3B" stroke-width="2"/><path d="M250,68 H289" fill="none" stroke="#0D3D3B" stroke-width="2" marker-end="url(#f2-t)"/><path d="M250,218 H289" fill="none" stroke="#0D3D3B" stroke-width="2" marker-end="url(#f2-t)"/><path d="M250,368 H289" fill="none" stroke="#0D3D3B" stroke-width="2" marker-end="url(#f2-t)"/><rect x="290" y="24" width="210" height="88" rx="3" fill="#D0E8E6" stroke="#0D3D3B" stroke-width="1.5"/><text x="395.0" y="51.0" text-anchor="middle" font-family="Space Grotesk, sans-serif" font-size="14" font-weight="700" fill="#0D3D3B">Near-real-time layer</text><text x="395.0" y="67.0" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10.5" font-weight="400" fill="#0D3D3B">fresh data, in chunks</text><text x="395.0" y="81.0" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10.5" font-weight="400" fill="#0D3D3B">+ Elasticsearch for</text><text x="395.0" y="95.0" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10.5" font-weight="400" fill="#0D3D3B">selected anomaly cases</text><rect x="290" y="180" width="210" height="76" rx="3" fill="#FFFFFF" stroke="#161D29" stroke-width="1"/><text x="395.0" y="208.0" text-anchor="middle" font-family="Space Grotesk, sans-serif" font-size="13" font-weight="700" fill="#161D29">Hot · Amazon RDS</text><text x="395.0" y="224.0" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10.5" font-weight="400" fill="#3E4756">last ~60 days</text><text x="395.0" y="238.0" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10.5" font-weight="400" fill="#3E4756">serves APIs + ops analytics</text><rect x="290" y="330" width="210" height="76" rx="3" fill="#FFFFFF" stroke="#161D29" stroke-width="1"/><text x="395.0" y="358.0" text-anchor="middle" font-family="Space Grotesk, sans-serif" font-size="13" font-weight="700" fill="#161D29">Cold · S3 Parquet</text><text x="395.0" y="374.0" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10.5" font-weight="400" fill="#3E4756">medallion · queried via Athena</text><text x="395.0" y="388.0" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10.5" font-weight="400" fill="#3E4756">5 years · monthly archival</text><path d="M395,258 V328" fill="none" stroke="#556B7F" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#f2-g)"/><text x="405" y="297" text-anchor="start" font-family="IBM Plex Mono, monospace" font-size="10.5" font-weight="400" fill="#556B7F">weekly archival</text><rect x="600" y="33" width="244" height="58" rx="3" fill="#FFFFFF" stroke="#161D29" stroke-width="1"/><text x="722.0" y="59.0" text-anchor="middle" font-family="Space Grotesk, sans-serif" font-size="13" font-weight="700" fill="#161D29">ML anomaly alerts</text><text x="722.0" y="75.0" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10.5" font-weight="400" fill="#3E4756">Elasticsearch watchers → model</text><rect x="600" y="110" width="244" height="58" rx="3" fill="#FFFFFF" stroke="#161D29" stroke-width="1"/><text x="722.0" y="136.0" text-anchor="middle" font-family="Space Grotesk, sans-serif" font-size="13" font-weight="700" fill="#161D29">Self-service dashboards</text><text x="722.0" y="152.0" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10.5" font-weight="400" fill="#3E4756">Kibana · 1,300+ users</text><rect x="600" y="190" width="244" height="58" rx="3" fill="#FFFFFF" stroke="#161D29" stroke-width="1"/><text x="722.0" y="216.0" text-anchor="middle" font-family="Space Grotesk, sans-serif" font-size="13" font-weight="700" fill="#161D29">Apps via APIs</text><text x="722.0" y="232.0" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10.5" font-weight="400" fill="#3E4756">e.g. the fleet product</text><rect x="600" y="348" width="244" height="58" rx="3" fill="#FFFFFF" stroke="#161D29" stroke-width="1"/><text x="722.0" y="374.0" text-anchor="middle" font-family="Space Grotesk, sans-serif" font-size="13" font-weight="700" fill="#161D29">Discovery &amp; analytics</text><text x="722.0" y="390.0" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10.5" font-weight="400" fill="#3E4756">latency-insensitive use cases</text><path d="M501,62 H599" fill="none" stroke="#0D3D3B" stroke-width="2" marker-end="url(#f2-t)"/><path d="M501,92 L599,139" fill="none" stroke="#0D3D3B" stroke-width="2" marker-end="url(#f2-t)"/><path d="M501,218 L599,219" fill="none" stroke="#0D3D3B" stroke-width="2" marker-end="url(#f2-t)"/><path d="M501,368 L599,377" fill="none" stroke="#0D3D3B" stroke-width="2" marker-end="url(#f2-t)"/></g><line x1="16" y1="478" x2="46" y2="478" stroke="#0D3D3B" stroke-width="2"/><text x="54" y="482" text-anchor="start" font-family="IBM Plex Mono, monospace" font-size="10.5" font-weight="400" fill="#3E4756">data flow</text><line x1="139.4" y1="478" x2="169.4" y2="478" stroke="#556B7F" stroke-width="2" stroke-dasharray="6 4"/><text x="177.4" y="482" text-anchor="start" font-family="IBM Plex Mono, monospace" font-size="10.5" font-weight="400" fill="#3E4756">archival</text></svg></div>
+      <div class="hint">Swipe the diagram sideways →</div>
+      <div class="cap">Fig 02 — Devices to Kafka to processing, then three storage tiers that products read from</div>
+      <p class="read">Data flows in on the left and is processed once. Fresh data goes to a near-real-time layer for alerts and dashboards, recent data to a fast store that apps query, and older data to cheap long-term storage.</p>
+    </div>
+
+    <div class="decision">
+      <div class="decision-head">Key decision — Amazon Kinesis vs. MSK (Kafka)</div>
+      <div class="decision-grid">
+        <div class="decision-col considered">
+          <h4>Considered: Amazon Kinesis</h4>
+          <p>Met the minutes-level need, but shard-based throughput costs were expected to climb at 5TB+/day.</p>
+        </div>
+        <div class="decision-col chosen">
+          <h4>Chosen: MSK (Kafka)</h4>
+          <p>Also met the need, and won on replayability, fit with our AWS architecture and the Kafka ecosystem we already had.</p>
+        </div>
+      </div>
+      <div class="decision-also"><b>Also</b>PySpark over Flink: Flink expertise was scarce, while a trained PySpark pool made the platform easier to maintain and staff.</div>
+    </div>
+
+    <div class="block">
+      <div class="block-label">Impact</div>
+      <div class="stats">
+        <div class="stat"><div class="num" data-to="5" data-suf="TB+">5TB+</div><div class="label">Telemetry per day</div></div>
+        <div class="stat"><div class="num">24h→20min</div><div class="label">Fault-detection data<small>time until data is available</small></div></div>
+        <div class="stat"><div class="num" data-to="30" data-suf="%">30%</div><div class="label">Lower P90 data latency<small>via the pipeline-health dashboard</small></div></div>
+        <div class="stat"><div class="num">4mo→days</div><div class="label">Team onboarding<small>internal quality and NPI teams</small></div></div>
+      </div>
+    </div>
+
+    <div class="block">
+      <div class="block-label">What it unlocked</div>
+      <div class="unlock">
+        <div class="u-card"><h4>Earlier warnings</h4><p>Machine-learning alerts reach service engineers up to a day before a component fails, and 95% of alerts are genuine. Data science built the model; my team owned detection and triggering, and I owned the use case and workflow.</p><div class="m">up to 1 day ahead · 95% precision</div></div>
+        <div class="u-card"><h4>See where data gets stuck</h4><p>A pipeline-health dashboard shows quality and latency at each stage, from device to data lake, so teams could find and fix the bottlenecks.</p><div class="m">P90 latency −30%</div></div>
+        <div class="u-card"><h4>Dashboards teams build themselves</h4><p>Reusable self-service dashboard building blocks that each team extends for its own needs. I drove adoption through roadshows and onboarding.</p><div class="m">1,300+ users · 10+ product lines</div></div>
+        <div class="u-card"><h4>One schema for five formats</h4><p>Five incoming device formats were standardized to JSON with topic schemas in Glue Schema Registry, and I worked with the Collibra team on lineage.</p><div class="m">onboarding 4 months → days</div></div>
+      </div>
+    </div>
+
+    <details class="deep">
+      <summary><span>Under the hood<small>for the technical reader</small></span></summary>
+      <div class="deep-body"><dl>
+        <dt>Ingest</dt><dd>Kafka on <code>AWS MSK</code> ingests 5TB+ a day. Incoming formats (JSON, XML, TXT, CSV and raw logs) are standardized to JSON with topic schemas in <code>Glue Schema Registry</code>.</dd>
+        <dt>Process</dt><dd><code>Spark</code> on <code>EMR</code> with PySpark transforms the stream. A near-real-time layer stores data in chunks; selected anomaly use cases also go to <code>Elasticsearch</code>, where watchers monitor for anomalies and trigger model workflows.</dd>
+        <dt>Hot store</dt><dd><code>RDS</code>, holding about 60 days of near-real-time data with weekly archival. It serves APIs for consuming apps and operational analytics.</dd>
+        <dt>Cold store</dt><dd><code>S3</code> in Parquet with a medallion architecture, queried through <code>Athena</code>: five years, monthly archival, for latency-insensitive use cases. Glue prepares historical data for discovery and analytics.</dd>
+        <dt>Compliance</dt><dd>The platform carries PHI (protected health information), which is why it is built to be HIPAA-compliant.</dd>
+      </dl></div>
+    </details>
+
+    <div class="reflection"><p>The product was never “a Kafka platform”. It was faster access to machine intelligence, so engineers could make decisions sooner.</p></div>
+    <div class="next"><a href="#genai">Next: asking the data questions →</a></div>
+  </div>
+</section>
+
+<div class="signal" aria-hidden="true"><svg viewBox="0 0 600 56" preserveAspectRatio="none"><path d="M0,28 L220,28 L238,8 L252,48 L266,28 L600,28"/></svg><div class="pulse"></div></div>
+
+<!-- ======== CASE 3: GENAI ======== -->
+<section class="case wrap reveal" id="genai" data-title="GenAI">
+  <div class="case-num" aria-hidden="true">03</div>
+  <div class="case-eyebrow"><span class="dot"></span>Case 03 · GenAI product</div>
+  <h2 class="case-title">GenAI Conversational Assistant</h2>
+  <p class="case-hook">The answers existed, in telemetry, service manuals and training material. Engineers just had to search each source and interpret it by hand.</p>
+  <span class="badge poc"><span class="badge-dot"></span>MVP · engineer stays in the loop</span>
+
+  <div class="case-body">
+    <div class="block">
+      <div class="block-label">The story</div>
+      <p>Service and remote engineers had plenty of machine telemetry and technical documentation, but getting an answer meant searching several sources and interpreting the result manually. The data wasn’t the bottleneck; the last mile of <em>understanding</em> was.</p>
+      <p>The assistant brings those sources together and answers in plain language, and the engineer still makes the call. In the MVP, diagnostic response time fell by about 60%, from roughly an hour to about 24 minutes. Since then, requests to extend it have kept coming in.</p>
+    </div>
+
+    <div class="role"><div class="k">My role</div><p>Led product work from use-case definition and MVP scope through validation with engineering and the target users, and helped define the metadata that lets the assistant understand machine parameters.</p></div>
+
+    <div class="diagram">
+      <div class="scroll"><svg viewBox="0 0 860 410" role="img" aria-label="GenAI assistant architecture: service manuals and training material, structured machine data, and semantic metadata feed an orchestration layer and LLM. The service engineer converses with it and makes the final decision, and feedback on whether a recommendation was followed and resolved the issue flows back." xmlns="http://www.w3.org/2000/svg"><defs><marker id="f3-t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#0D3D3B"/></marker><marker id="f3-g" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#556B7F"/></marker><marker id="f3-a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#8B4513"/></marker></defs><rect x="16" y="36" width="260" height="76" rx="3" fill="#FFFFFF" stroke="#161D29" stroke-width="1"/><text x="146.0" y="64.0" text-anchor="middle" font-family="Space Grotesk, sans-serif" font-size="13" font-weight="700" fill="#161D29">Service manuals &amp; training</text><text x="146.0" y="80.0" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10.5" font-weight="400" fill="#3E4756">chunked · embedded · retrieved</text><text x="146.0" y="94.0" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10.5" font-weight="400" fill="#3E4756">(RAG on S3 Vectors)</text><rect x="16" y="134" width="260" height="76" rx="3" fill="#FFFFFF" stroke="#161D29" stroke-width="1"/><text x="146.0" y="162.0" text-anchor="middle" font-family="Space Grotesk, sans-serif" font-size="13" font-weight="700" fill="#161D29">Structured machine data</text><text x="146.0" y="178.0" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10.5" font-weight="400" fill="#3E4756">RDS tables</text><text x="146.0" y="192.0" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10.5" font-weight="400" fill="#3E4756">Neptune: entity relationships</text><rect x="16" y="232" width="260" height="76" rx="3" fill="#F5E6D3" stroke="#8B4513" stroke-width="1"/><text x="146.0" y="260.0" text-anchor="middle" font-family="Space Grotesk, sans-serif" font-size="13" font-weight="700" fill="#161D29">Semantic metadata</text><text x="146.0" y="276.0" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10.5" font-weight="400" fill="#8B4513">what each parameter means</text><text x="146.0" y="290.0" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10.5" font-weight="400" fill="#8B4513">(tube temp, pressure, flow)</text><rect x="340" y="100" width="220" height="176" rx="3" fill="#D0E8E6" stroke="#0D3D3B" stroke-width="1.5"/><text x="450.0" y="178.0" text-anchor="middle" font-family="Space Grotesk, sans-serif" font-size="16" font-weight="700" fill="#0D3D3B">Orchestration + LLM</text><text x="450.0" y="194.0" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10.5" font-weight="400" fill="#0D3D3B">retrieve · ground · answer</text><text x="450.0" y="208.0" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10.5" font-weight="400" fill="#0D3D3B">not from the model’s memory</text><path d="M277,74 L338,150" fill="none" stroke="#0D3D3B" stroke-width="2" marker-end="url(#f3-t)"/><path d="M277,172 L338,188" fill="none" stroke="#0D3D3B" stroke-width="2" marker-end="url(#f3-t)"/><path d="M277,270 L338,226" fill="none" stroke="#0D3D3B" stroke-width="2" marker-end="url(#f3-t)"/><rect x="668" y="132" width="176" height="108" rx="3" fill="#FFFFFF" stroke="#161D29" stroke-width="1"/><text x="756.0" y="176.0" text-anchor="middle" font-family="Space Grotesk, sans-serif" font-size="13" font-weight="700" fill="#161D29">Service engineer</text><text x="756.0" y="192.0" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10.5" font-weight="400" fill="#3E4756">asks in plain language</text><text x="756.0" y="206.0" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10.5" font-weight="400" fill="#3E4756">makes the final call</text><path d="M562,188 H666" fill="none" stroke="#0D3D3B" stroke-width="2" marker-start="url(#f3-t)" marker-end="url(#f3-t)"/><text x="614" y="176" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10.5" font-weight="400" fill="#3E4756">conversation</text><path d="M756,242 V330 H450 V279" fill="none" stroke="#8B4513" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#f3-a)"/><text x="603" y="352" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10.5" font-weight="400" fill="#8B4513">feedback: was it followed? did it resolve the issue?</text><text x="16" y="396" text-anchor="start" font-family="IBM Plex Mono, monospace" font-size="10.5" font-weight="400" fill="#3E4756">Evaluated at three levels: retrieval quality · answer accuracy &amp; grounding · business outcome</text></svg></div>
+      <div class="hint">Swipe the diagram sideways →</div>
+      <div class="cap">Fig 03 — Documents and machine data, grounded by metadata; the engineer decides</div>
+      <p class="read">Three inputs feed one assistant: documents, machine data, and a description of what each machine parameter means. The assistant answers; the engineer decides, and tells us whether the answer helped.</p>
+    </div>
+
+    <div class="decision">
+      <div class="decision-head">Key decision — raw data columns vs. semantic metadata</div>
+      <div class="decision-grid">
+        <div class="decision-col considered">
+          <h4>Option A: raw columns</h4>
+          <p>Hand the model the database fields as they are. Quick to wire up, but a column name says nothing about what tube temperature, pressure or flow rate mean, so answers come out generic and engineers won’t trust them.</p>
+        </div>
+        <div class="decision-col chosen">
+          <h4>Chosen: semantic metadata</h4>
+          <p>Describe every parameter in metadata the model can read, so it interprets machine data the way an engineer would: specific enough to act on, and to ask follow-ups against.</p>
+        </div>
+      </div>
+      <div class="decision-also"><b>Also</b>Retrieval (RAG) instead of retraining the model each time the knowledge changes.</div>
+    </div>
+
+    <div class="block">
+      <div class="block-label">Guardrails &amp; evaluation</div>
+      <p>The assistant recommends; it never acts on a machine or makes a service decision. We capture whether each recommendation was followed and whether it resolved the issue. I judged the product at three levels: did it retrieve the right information, was the answer accurate and grounded, and did engineers resolve issues faster.</p>
+    </div>
+
+    <div class="block">
+      <div class="block-label">Impact</div>
+      <div class="stats">
+        <div class="stat"><div class="num" data-to="60" data-suf="%">60%</div><div class="label">Faster diagnostic response<small>about 1 hour → 24 minutes</small></div></div>
+        <div class="stat"><div class="num" data-to="2" data-suf="">2</div><div class="label">Knowledge types, one answer</div></div>
+        <div class="stat"><div class="num" data-to="3" data-suf="">3</div><div class="label">Evaluation levels</div></div>
+        <div class="stat"><div class="num" data-to="0" data-suf="">0</div><div class="label">Direct machine actions<small>the engineer decides</small></div></div>
+      </div>
+    </div>
+
+    <details class="deep">
+      <summary><span>Under the hood<small>for the technical reader</small></span></summary>
+      <div class="deep-body"><dl>
+        <dt>Structured data</dt><dd>Machine data lives in <code>RDS</code>, with <code>Neptune</code> representing relationships between entities.</dd>
+        <dt>Documents (RAG)</dt><dd>Service manuals and training material sit in <code>S3</code>. Content is chunked and embedded, and relevant passages are retrieved with <code>Amazon S3 Vectors</code>.</dd>
+        <dt>Orchestration</dt><dd>For each question, orchestration pulls the relevant machine information and document passages together and passes that context to the LLM: GPT in the MVP, with Mistral evaluated as another option.</dd>
+        <dt>Feedback loop</dt><dd>Engineers’ feedback records whether a recommendation was followed and whether it resolved the issue.</dd>
+        <dt>Boundaries</dt><dd>No model was trained from scratch, and the assistant has no direct control over machines.</dd>
+      </dl></div>
+    </details>
+
+    <div class="reflection"><p>The hardest part wasn’t the model. It was teaching it what our parameters mean, so that asking beat searching every source yourself.</p></div>
+    <div class="next"><a href="#agents">Next: AI inside the product team →</a></div>
+  </div>
+</section>
+
+<div class="signal" aria-hidden="true"><svg viewBox="0 0 600 56" preserveAspectRatio="none"><path d="M0,28 L220,28 L238,8 L252,48 L266,28 L600,28"/></svg><div class="pulse"></div></div>
+
+<!-- ======== CASE 4: AGENTS ======== -->
+<section class="case wrap reveal" id="agents" data-title="Agents">
+  <div class="case-num" aria-hidden="true">04</div>
+  <div class="case-eyebrow"><span class="dot"></span>Case 04 · AI agents</div>
+  <h2 class="case-title">AI Agents across the Software Lifecycle</h2>
+  <p class="case-hook">Too much product time went into translating requirements into stories, then checking finished work against acceptance criteria. Two agents now take the first pass at both.</p>
+  <span class="badge poc"><span class="badge-dot"></span>Pilot complete · now in adoption</span>
+
+  <div class="case-body">
+    <div class="block">
+      <div class="block-label">The story</div>
+      <p>Our product knowledge lived in Confluence, in Git, and in years of requirements and user stories in Rally. Turning a new requirement into well-structured engineering stories meant translating all of that by hand, and checking delivered work against the acceptance criteria was manual too.</p>
+      <p>I designed and piloted two agents on AWS Kiro: a <em>Product Agent</em> that drafts the story with that full context, and an <em>Acceptance Agent</em> that checks finished work against the criteria. In the pilot, we measured completion times before and after and saw 50–70% time saved across the lifecycle. It’s now being rolled out.</p>
+    </div>
+
+    <div class="role"><div class="k">My role</div><p>Designed, built and piloted both agents; defined the workflows worth improving, shaped the agents and their knowledge sources with engineering, and set the human-in-the-loop model.</p></div>
+
+    <div class="diagram">
+      <div class="scroll"><svg viewBox="0 0 860 400" role="img" aria-label="AI agents across the software lifecycle: a requirement in Markdown or Excel goes to the Product Agent, which uses Confluence, Git and Rally knowledge through MCP to create a Confluence page and a Rally user story. Engineers build it with Kiro and push to Git. The Acceptance Agent checks criteria one by one: objective low-risk checks can be approved by the agent, and subjective quality checks go to a person, before the story is accepted." xmlns="http://www.w3.org/2000/svg"><defs><marker id="f4-t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#0D3D3B"/></marker><marker id="f4-g" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#556B7F"/></marker><marker id="f4-a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#8B4513"/></marker></defs><text x="16" y="82" text-anchor="start" font-family="IBM Plex Mono, monospace" font-size="10.5" font-weight="500" fill="#0D3D3B" letter-spacing="1.2">1 · FIRST PASS: THE STORY</text><rect x="189" y="10" width="210" height="48" rx="3" fill="#FFFFFF" stroke="#0D3D3B" stroke-width="1.5" stroke-dasharray="5 4"/><text x="294.0" y="31.0" text-anchor="middle" font-family="Space Grotesk, sans-serif" font-size="13" font-weight="700" fill="#161D29">Existing knowledge</text><text x="294.0" y="47.0" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10.5" font-weight="400" fill="#3E4756">Confluence · Git · Rally (MCP)</text><path d="M294,59 V91" fill="none" stroke="#0D3D3B" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#f4-t)"/><rect x="16" y="92" width="140" height="76" rx="3" fill="#FFFFFF" stroke="#161D29" stroke-width="1"/><text x="86.0" y="127.0" text-anchor="middle" font-family="Space Grotesk, sans-serif" font-size="13" font-weight="700" fill="#161D29">Requirement</text><text x="86.0" y="143.0" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10.5" font-weight="400" fill="#3E4756">Markdown or Excel</text><path d="M157,130 H205" fill="none" stroke="#0D3D3B" stroke-width="2" marker-end="url(#f4-t)"/><rect x="206" y="92" width="176" height="76" rx="3" fill="#D0E8E6" stroke="#0D3D3B" stroke-width="1.5"/><text x="294.0" y="127.0" text-anchor="middle" font-family="Space Grotesk, sans-serif" font-size="15" font-weight="700" fill="#0D3D3B">Product Agent</text><text x="294.0" y="143.0" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10.5" font-weight="400" fill="#0D3D3B">drafts with full context</text><path d="M383,130 H431" fill="none" stroke="#0D3D3B" stroke-width="2" marker-end="url(#f4-t)"/><rect x="432" y="92" width="158" height="76" rx="3" fill="#FFFFFF" stroke="#161D29" stroke-width="1"/><text x="511.0" y="120.0" text-anchor="middle" font-family="Space Grotesk, sans-serif" font-size="13" font-weight="700" fill="#161D29">Story created</text><text x="511.0" y="136.0" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10.5" font-weight="400" fill="#3E4756">Confluence page</text><text x="511.0" y="150.0" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10.5" font-weight="400" fill="#3E4756">+ Rally user story</text><path d="M591,130 H639" fill="none" stroke="#0D3D3B" stroke-width="2" marker-end="url(#f4-t)"/><rect x="640" y="92" width="204" height="76" rx="3" fill="#FFFFFF" stroke="#161D29" stroke-width="1"/><text x="742.0" y="120.0" text-anchor="middle" font-family="Space Grotesk, sans-serif" font-size="13" font-weight="700" fill="#161D29">Engineers build</text><text x="742.0" y="136.0" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10.5" font-weight="400" fill="#3E4756">select · prioritize ·</text><text x="742.0" y="150.0" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10.5" font-weight="400" fill="#3E4756">implement with Kiro → Git</text><path d="M742,169 V235" fill="none" stroke="#0D3D3B" stroke-width="2" marker-end="url(#f4-t)"/><text x="16" y="226" text-anchor="start" font-family="IBM Plex Mono, monospace" font-size="10.5" font-weight="500" fill="#0D3D3B" letter-spacing="1.2">2 · FIRST PASS: THE CHECK</text><rect x="640" y="236" width="204" height="76" rx="3" fill="#D0E8E6" stroke="#0D3D3B" stroke-width="1.5"/><text x="742.0" y="271.0" text-anchor="middle" font-family="Space Grotesk, sans-serif" font-size="15" font-weight="700" fill="#0D3D3B">Acceptance Agent</text><text x="742.0" y="287.0" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10.5" font-weight="400" fill="#0D3D3B">checks criteria one by one</text><rect x="392" y="206" width="196" height="60" rx="3" fill="#FFFFFF" stroke="#161D29" stroke-width="1"/><text x="490.0" y="233.0" text-anchor="middle" font-family="Space Grotesk, sans-serif" font-size="13" font-weight="700" fill="#161D29">Objective, low-risk</text><text x="490.0" y="249.0" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10.5" font-weight="400" fill="#3E4756">agent can approve</text><rect x="392" y="286" width="196" height="60" rx="3" fill="#F5E6D3" stroke="#8B4513" stroke-width="1"/><text x="490.0" y="313.0" text-anchor="middle" font-family="Space Grotesk, sans-serif" font-size="13" font-weight="700" fill="#161D29">Subjective quality</text><text x="490.0" y="329.0" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10.5" font-weight="400" fill="#8B4513">goes to a person</text><path d="M640,266 H614 V236 H589" fill="none" stroke="#0D3D3B" stroke-width="2" marker-end="url(#f4-t)"/><path d="M640,282 H614 V316 H589" fill="none" stroke="#8B4513" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#f4-a)"/><rect x="16" y="246" width="170" height="76" rx="3" fill="#FFFFFF" stroke="#161D29" stroke-width="1"/><text x="101.0" y="274.0" text-anchor="middle" font-family="Space Grotesk, sans-serif" font-size="13" font-weight="700" fill="#161D29">Accepted</text><text x="101.0" y="290.0" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10.5" font-weight="400" fill="#3E4756">story closed</text><text x="101.0" y="304.0" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10.5" font-weight="400" fill="#3E4756">approval logged</text><path d="M392,236 H290 V270 H187" fill="none" stroke="#0D3D3B" stroke-width="2" marker-end="url(#f4-t)"/><path d="M392,316 H290 V298 H187" fill="none" stroke="#8B4513" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#f4-a)"/><text x="16" y="384" text-anchor="start" font-family="IBM Plex Mono, monospace" font-size="10.5" font-weight="400" fill="#3E4756">Agents take the first pass · people keep the judgment calls · human approvals are recorded in the story discussion</text></svg></div>
+      <div class="hint">Swipe the diagram sideways →</div>
+      <div class="cap">Fig 04 — Two agents at two points in the lifecycle; people keep the judgment calls</div>
+      <p class="read">Top row: a requirement becomes a drafted story and engineers build it. Bottom row: the Acceptance Agent checks the work criterion by criterion, clears the objective ones, and sends the subjective ones to a person.</p>
+    </div>
+
+    <div class="decision">
+      <div class="decision-head">Key decision — let the agent accept everything, or keep a person in the loop</div>
+      <div class="decision-grid">
+        <div class="decision-col considered">
+          <h4>Considered: fully autonomous acceptance</h4>
+          <p>Fastest on paper. But an agent independently accepting every change puts speed ahead of judgment, and nobody is accountable when it gets one wrong.</p>
+        </div>
+        <div class="decision-col chosen">
+          <h4>Chosen: agent clears the objective, a person decides the rest</h4>
+          <p>The agent checks each criterion and can approve objective, low-risk ones. Subjective quality checks go to a person, and human approvals are recorded in the story discussion.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="block">
+      <div class="block-label">Impact</div>
+      <div class="stats">
+        <div class="stat"><div class="num">50–70%</div><div class="label">Time saved across the lifecycle<small>pilot, before vs. after</small></div></div>
+        <div class="stat"><div class="num" data-to="2" data-suf="">2</div><div class="label">Agents: product + acceptance</div></div>
+        <div class="stat"><div class="num" data-to="3" data-suf="">3</div><div class="label">Knowledge sources<small>Confluence · Git · Rally</small></div></div>
+        <div class="stat"><div class="num">1 by 1</div><div class="label">Acceptance criteria checked individually</div></div>
+      </div>
+      <p class="stat-note">Time saved is the headline, but story quality, acceptance accuracy and how often people override the agent are what tell us the agents are actually good.</p>
+    </div>
+
+    <details class="deep">
+      <summary><span>Under the hood<small>for the technical reader</small></span></summary>
+      <div class="deep-body"><dl>
+        <dt>Product Agent</dt><dd>Takes a new requirement as a Markdown file or Excel context. Through <code>MCP</code> it reads past stories, Confluence pages and Git content, then generates a Confluence page and a Rally user story. Guardrails cover required fields, document upload, story format and acceptance criteria.</dd>
+        <dt>Build step</dt><dd>Engineers select and prioritize the story, implement it with <code>Kiro</code>, and push the code to Git.</dd>
+        <dt>Acceptance Agent</dt><dd>Reviews acceptance criteria one by one. Objective, low-risk checks can be approved by the agent; subjective quality checks are routed to a person, whose approval is recorded in the discussion section for traceability.</dd>
+        <dt>Boundaries</dt><dd>No model fine-tuning. The agents work from retrieved reference material and guardrails.</dd>
+      </dl></div>
+    </details>
+
+    <div class="reflection"><p>The goal isn’t AI-written stories. It’s less repetitive work across the lifecycle, with people still responsible wherever judgment or risk is involved.</p></div>
+    <div class="next"><a href="#probes">Next: the newest case →</a></div>
+  </div>
+</section>
+
+<div class="signal" aria-hidden="true"><svg viewBox="0 0 600 56" preserveAspectRatio="none"><path d="M0,28 L220,28 L238,8 L252,48 L266,28 L600,28"/></svg><div class="pulse"></div></div>
+
+<!-- ======== CASE 5: PROBES ======== -->
+<section class="case wrap reveal" id="probes" data-title="Probes">
+  <div class="case-num" aria-hidden="true">05</div>
+  <div class="case-eyebrow"><span class="dot"></span>Case 05 · Product discovery</div>
+  <h2 class="case-title">Probe Intelligence</h2>
+  <p class="case-hook">Replacing ultrasound probes is a significant cost. Three signals could show where it can be avoided.</p>
+  <span class="badge open"><span class="badge-dot"></span>In solutioning · discovery complete · nothing built yet</span>
+
+  <div class="case-body">
+    <div class="block">
+      <div class="block-label">The story</div>
+      <p>I’m directing a 10-member team to shape a probe intelligence product around three questions about every ultrasound probe: <em>Is it genuine? How has it been used? Is it under- or over-utilized?</em></p>
+      <p>I led discovery and problem identification, then sized the opportunity at about <em>$50M of projected cost savings</em>, from the average number of probes replaced and what each replacement costs. That is a sized opportunity, not a delivered saving.</p>
+    </div>
+
+    <div class="role"><div class="k">My role</div><p>Set the product vision and scope, led discovery and the sizing, and lead the team day to day. The team helps with analysis and implementation.</p></div>
+
+    <div class="block">
+      <div class="block-label">Where it stands</div>
+      <ol class="stepper">
+        <li class="done"><div class="st-dot" aria-hidden="true">✓</div><div class="st-t">Discovery</div><div class="st-s">Done</div></li>
+        <li class="done"><div class="st-dot" aria-hidden="true">✓</div><div class="st-t">Problem identification</div><div class="st-s">Done</div></li>
+        <li class="now"><div class="st-dot" aria-hidden="true">3</div><div class="st-t">Solutioning</div><div class="st-s">Now</div></li>
+        <li class="todo"><div class="st-dot" aria-hidden="true">4</div><div class="st-t">Build</div><div class="st-s">Not started</div></li>
+      </ol>
+    </div>
+
+    <div class="diagram">
+      <div class="scroll"><svg viewBox="0 0 860 430" role="img" aria-label="Probe intelligence: manufacturing data and other system data are checked against probes installed in hospitals to detect non-genuine probes. Together with usage history and under- or over-utilization, these are the three signals feeding the probe intelligence product, which is in solutioning. An open decision remains between an NLP-based approach and building on Power BI. The 50 million dollar figure is sized from the average number of probes replaced times the cost of each replacement." xmlns="http://www.w3.org/2000/svg"><defs><marker id="f5-t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#0D3D3B"/></marker><marker id="f5-g" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#556B7F"/></marker><marker id="f5-a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#8B4513"/></marker></defs><rect x="16" y="30" width="220" height="48" rx="3" fill="#FFFFFF" stroke="#161D29" stroke-width="1"/><text x="126.0" y="58.0" text-anchor="middle" font-family="Space Grotesk, sans-serif" font-size="13" font-weight="700" fill="#161D29">Manufacturing data</text><rect x="16" y="94" width="220" height="48" rx="3" fill="#FFFFFF" stroke="#161D29" stroke-width="1"/><text x="126.0" y="122.0" text-anchor="middle" font-family="Space Grotesk, sans-serif" font-size="13" font-weight="700" fill="#161D29">Other data in our systems</text><rect x="16" y="158" width="220" height="60" rx="3" fill="#FFFFFF" stroke="#161D29" stroke-width="1"/><text x="126.0" y="185.0" text-anchor="middle" font-family="Space Grotesk, sans-serif" font-size="13" font-weight="700" fill="#161D29">Probes installed in hospitals</text><text x="126.0" y="201.0" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10.5" font-weight="400" fill="#3E4756">checked against</text><path d="M237,54 H262" fill="none" stroke="#0D3D3B" stroke-width="2"/><path d="M237,118 H262" fill="none" stroke="#0D3D3B" stroke-width="2"/><path d="M237,188 H262" fill="none" stroke="#0D3D3B" stroke-width="2"/><path d="M262,54 V188" fill="none" stroke="#0D3D3B" stroke-width="2"/><path d="M262,120 H299" fill="none" stroke="#0D3D3B" stroke-width="2" marker-end="url(#f5-t)"/><rect x="300" y="84" width="230" height="72" rx="3" fill="#D0E8E6" stroke="#0D3D3B" stroke-width="1.5"/><text x="415.0" y="110.0" text-anchor="middle" font-family="Space Grotesk, sans-serif" font-size="13" font-weight="700" fill="#0D3D3B">Non-genuine probe detection</text><text x="415.0" y="126.0" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10.5" font-weight="400" fill="#0D3D3B">manufacturing + system data</text><text x="415.0" y="140.0" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10.5" font-weight="400" fill="#0D3D3B">vs. installed probes</text><rect x="300" y="190" width="230" height="72" rx="3" fill="#FFFFFF" stroke="#161D29" stroke-width="1"/><text x="415.0" y="223.0" text-anchor="middle" font-family="Space Grotesk, sans-serif" font-size="13" font-weight="700" fill="#161D29">Usage history</text><text x="415.0" y="239.0" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10.5" font-weight="400" fill="#3E4756">how each probe has been used</text><rect x="300" y="296" width="230" height="72" rx="3" fill="#FFFFFF" stroke="#161D29" stroke-width="1"/><text x="415.0" y="329.0" text-anchor="middle" font-family="Space Grotesk, sans-serif" font-size="13" font-weight="700" fill="#161D29">Under / over-utilization</text><text x="415.0" y="345.0" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10.5" font-weight="400" fill="#3E4756">used too little or too much</text><path d="M531,120 H565" fill="none" stroke="#0D3D3B" stroke-width="2"/><path d="M531,332 H565" fill="none" stroke="#0D3D3B" stroke-width="2"/><path d="M565,120 V332" fill="none" stroke="#0D3D3B" stroke-width="2"/><path d="M531,226 H599" fill="none" stroke="#0D3D3B" stroke-width="2" marker-end="url(#f5-t)"/><rect x="600" y="170" width="244" height="112" rx="3" fill="#FFFFFF" stroke="#0D3D3B" stroke-width="1.5" stroke-dasharray="5 4"/><text x="722.0" y="216.0" text-anchor="middle" font-family="Space Grotesk, sans-serif" font-size="14" font-weight="700" fill="#161D29">Probe intelligence product</text><text x="722.0" y="232.0" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10.5" font-weight="400" fill="#3E4756">in solutioning</text><text x="722.0" y="246.0" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10.5" font-weight="400" fill="#3E4756">nothing built yet</text><path d="M722,283 V321" fill="none" stroke="#8B4513" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#f5-a)"/><rect x="600" y="322" width="244" height="92" rx="3" fill="#FFFFFF" stroke="#8B4513" stroke-width="1.5" stroke-dasharray="5 4"/><text x="722" y="342" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10.5" font-weight="500" fill="#8B4513" letter-spacing="1.4">OPEN DECISION</text><rect x="612" y="352" width="108" height="50" rx="3" fill="#FFFFFF" stroke="#161D29" stroke-width="1"/><text x="666.0" y="374.0" text-anchor="middle" font-family="Space Grotesk, sans-serif" font-size="12" font-weight="700" fill="#161D29">NLP-based</text><text x="666.0" y="390.0" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10.5" font-weight="400" fill="#3E4756">approach</text><rect x="724" y="352" width="108" height="50" rx="3" fill="#FFFFFF" stroke="#161D29" stroke-width="1"/><text x="778.0" y="374.0" text-anchor="middle" font-family="Space Grotesk, sans-serif" font-size="12" font-weight="700" fill="#161D29">Power BI</text><text x="778.0" y="390.0" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10.5" font-weight="400" fill="#3E4756">build on top</text><rect x="16" y="300" width="250" height="70" rx="3" fill="#F5E6D3" stroke="#8B4513" stroke-width="1"/><text x="141.0" y="325.0" text-anchor="middle" font-family="Space Grotesk, sans-serif" font-size="13" font-weight="700" fill="#161D29">How the $50M was sized</text><text x="141.0" y="341.0" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10.5" font-weight="400" fill="#8B4513">avg. probes replaced</text><text x="141.0" y="355.0" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10.5" font-weight="400" fill="#8B4513">× cost of each replacement</text><line x1="16" y1="408" x2="46" y2="408" stroke="#0D3D3B" stroke-width="2" stroke-dasharray="6 4"/><text x="54" y="412" text-anchor="start" font-family="IBM Plex Mono, monospace" font-size="10.5" font-weight="400" fill="#3E4756">not built yet</text></svg></div>
+      <div class="hint">Swipe the diagram sideways →</div>
+      <div class="cap">Fig 05 — Three signals feeding one product; the build approach is still open</div>
+      <p class="read">Spotting non-genuine probes works from signals in manufacturing data and other data already in our systems, checked against the probes actually installed in hospitals. Usage history and utilization are the other two signals.</p>
+    </div>
+
+    <div class="callout amber"><b>Open decision</b>NLP-based approach, or a solution built on top of Power BI. Both are under evaluation, and no decision has been made yet.</div>
+
+    <div class="block">
+      <div class="block-label">Sizing, not savings</div>
+      <div class="stats amber">
+        <div class="stat"><div class="num" data-to="50" data-pre="$" data-suf="M">$50M</div><div class="label">Projected cost-savings opportunity<small>sized, not realized</small></div></div>
+        <div class="stat"><div class="num" data-to="10" data-suf="">10</div><div class="label">People on the team I direct</div></div>
+        <div class="stat"><div class="num" data-to="3" data-suf="">3</div><div class="label">Signals in scope</div></div>
+        <div class="stat"><div class="num" data-to="2" data-suf="">2</div><div class="label">Solution options under evaluation</div></div>
+      </div>
+      <p class="stat-note">How it was sized: average number of probes replaced × cost of each replacement.</p>
+    </div>
+
+    <div class="reflection"><p>This one is earlier than the others, and I’ve kept it that way: a sized opportunity rather than a result, with the build approach still open.</p></div>
+    <div class="next"><a href="#top">Back to the top ↑</a></div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="signal" aria-hidden="true"><svg viewBox="0 0 600 56" preserveAspectRatio="none"><path d="M0,28 L220,28 L238,8 L252,48 L266,28 L600,28"/></svg><div class="pulse"></div></div>
+  <div class="wrap foot-grid">
+    <div>
+      <h3>Aashrav Shah</h3>
+      <div class="more">Senior Technical Product Manager · GE HealthCare · Bengaluru</div>
+      <p class="ask">If one of these cases sounds like a problem on your team, I’d enjoy talking it through.</p>
+    </div>
+    <div class="hero-links">
+      <a href="https://linkedin.com/in/aashravshah" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="mailto:shahaashrav@gmail.com">shahaashrav@gmail.com</a>
+    </div>
+  </div>
+</footer>
+
+
+<script>
+
+(function () {
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var hasIO = 'IntersectionObserver' in window;
+  function $all(s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); }
+
+  /* ---- fade-up reveal ---- */
+  var reveals = $all('.reveal');
+  if (hasIO) {
+    var rio = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); rio.unobserve(e.target); } });
+    }, { threshold: 0.06 });
+    reveals.forEach(function (t) { rio.observe(t); });
+  } else { reveals.forEach(function (t) { t.classList.add('in'); }); }
+
+  /* ---- the scene: play the two timelines once, when it scrolls into view ---- */
+  var scene = document.getElementById('scene');
+  if (scene) {
+    if (hasIO && !reduce) {
+      var sio = new IntersectionObserver(function (es) {
+        es.forEach(function (e) { if (e.isIntersecting) { scene.classList.add('go'); sio.disconnect(); } });
+      }, { threshold: 0.35 });
+      sio.observe(scene);
+    } else { scene.classList.add('go'); }
+  }
+
+  /* ---- count-up for plain numbers (final text is already in the HTML) ---- */
+  var nums = $all('[data-to]');
+  function render(el, v) { el.textContent = (el.getAttribute('data-pre') || '') + Math.round(v) + (el.getAttribute('data-suf') || ''); }
+  if (hasIO && !reduce && nums.length) {
+    nums.forEach(function (el) { render(el, 0); });
+    var started = new WeakSet();
+    var nio = new IntersectionObserver(function (es) {
+      es.forEach(function (e) {
+        if (!e.isIntersecting || started.has(e.target)) return;
+        started.add(e.target); nio.unobserve(e.target);
+        var el = e.target, to = parseFloat(el.getAttribute('data-to')), t0 = null, dur = 1100;
+        (function step(ts) {
+          if (t0 === null) t0 = ts;
+          var p = Math.min((ts - t0) / dur, 1), eased = 1 - Math.pow(1 - p, 3);
+          render(el, to * eased);
+          if (p < 1) requestAnimationFrame(step); else render(el, to);
+        })(performance.now());
+      });
+    }, { threshold: 0.6 });
+    nums.forEach(function (el) { nio.observe(el); });
+  }
+
+  /* ---- scroll progress ---- */
+  var bar = document.getElementById('bar'), ticking = false;
+  function paint() {
+    var h = document.documentElement.scrollHeight - window.innerHeight;
+    var p = h > 0 ? Math.min(Math.max(window.scrollY / h, 0), 1) : 0;
+    if (bar) bar.style.transform = 'scaleX(' + p + ')';
+    ticking = false;
+  }
+  window.addEventListener('scroll', function () { if (!ticking) { ticking = true; requestAnimationFrame(paint); } }, { passive: true });
+  window.addEventListener('resize', paint);
+  paint();
+
+  /* ---- active nav link ---- */
+  var links = {};
+  $all('.nav-links a').forEach(function (a) { links[a.getAttribute('href').slice(1)] = a; });
+  if (hasIO) {
+    var nav = new IntersectionObserver(function (es) {
+      es.forEach(function (e) {
+        var a = links[e.target.id]; if (!a) return;
+        if (e.isIntersecting) {
+          Object.keys(links).forEach(function (k) { links[k].removeAttribute('aria-current'); });
+          a.setAttribute('aria-current', 'true');
+        } else if (a.getAttribute('aria-current')) { a.removeAttribute('aria-current'); }
+      });
+    }, { rootMargin: '-30% 0px -62% 0px' });
+    $all('section.case').forEach(function (s) { nav.observe(s); });
+  }
+})();
+
+/* Harden against in-app-browser forced dark mode by pinning key colours inline */
+(function () {
+  function imp(sel, prop, val) { document.querySelectorAll(sel).forEach(function (el) { el.style.setProperty(prop, val, 'important'); }); }
+  document.documentElement.style.setProperty('background-color', '#F5F6F8', 'important');
+  document.body.style.setProperty('background-color', '#F5F6F8', 'important');
+  document.body.style.setProperty('color', '#161D29', 'important');
+  imp('h1.hook, h2.case-title, .tour-head h2, .t-main b, footer h3, .proof .num', 'color', '#161D29');
+  imp('.proof .num, .stat .num', 'color', '#0D3D3B');
+  imp('.stats.amber .stat .num', 'color', '#8B4513');
+  imp('.block p, .scene-lines span, .role p, .callout, .u-card h4, .deep-body dd', 'color', '#161D29');
+  imp('.lede, .case-hook, .tour-sub, .t-main span, .u-card p, .proof .lab, .diagram .read', 'color', '#2C3E50');
+  imp('.eyebrow, .block-label, .diagram .cap, .tl-title, .tl-note, .tour-legend', 'color', '#556B7F');
+  imp('.scene, .proof > div, .stat, .decision, .diagram, .reflection, .role, .u-card, details.deep, a.step, .hero-links a, .next a', 'background-color', '#FFFFFF');
+  imp('nav.top', 'background-color', '#F5F6F8');
+})();
+
+</script>
+</body>
+</html>
